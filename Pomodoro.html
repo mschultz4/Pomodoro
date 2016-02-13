@@ -1,0 +1,93 @@
+<!doctype html>
+
+
+<html lang="en">
+
+<head>
+  <title>Pomodoro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+    svg {
+      display: inline;
+    }
+    body {
+      color: gray;
+      font-family: monospace;
+      font-size: 24px;
+      text-align: center;
+    }
+    button{
+      border: none;
+      background-color: white;
+    }
+
+    .container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .sessionLength, .breakLength{
+      display: inline;
+      text-align: center;
+    }
+    
+    .breakLength{
+      color: tomato;
+    }
+    
+    .glyphicon-play-circle{
+      font-size: 1.2em;
+      color: grey;
+    }
+
+     .glyphicon-stop{
+      color: tomato;
+    }
+
+    
+  </style>
+</head>
+
+<body ng-app="app" ng-controller="pomodoro">
+  <h1>Pomodoro</h1>
+  <div class="container">
+    
+    <div class="sessionLength">
+      <button ng-click="changeTimerLength('up', 'session')">&#9650</button>
+      <div>{{sessionLength}}</div>
+      <button ng-click="changeTimerLength('down', 'session')">&#9660</button>
+    </div>
+    <svg version="1.1" baseProfile="full" width="100" height="276" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="cut-off-circ">
+          <rect x="25" y="{{clipPathCircle}}" width="50" height="50" />
+        </clipPath>
+        <clipPath id="cut-off-rect">
+          <rect x="25" y="{{clipPathRectangle}}" width="50" height="160" />
+        </clipPath>
+      </defs>
+      <text x="27" y="20" font-size="16" font-family="monospace" fill="{{color}}">{{minutes}}:{{seconds}}</text>
+      <rect x="25" y="30" width="50" height="160" fill="{{color}}" clip-path="url(#cut-off-rect)" />
+      <circle cx="50" cy="225" r="25" fill="{{color}}" clip-path="url(#cut-off-circ)" />
+    </svg>
+    <div class="breakLength">
+      <button ng-click="changeTimerLength('up', 'break')">&#9650</button>
+      <div>{{breakLength}}</div>
+      <button ng-click="changeTimerLength('down', 'break')">&#9660</button>
+    </div>
+  
+  </div>
+  <button ng-click="startCountdown()" ng-hide="timer">
+    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+  </button>
+  <button ng-click="startCountdown()" ng-show="timer">
+    <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+  </button>
+    <script src="../../bower_components/angular/angular.min.js"></script>
+    <script src="Pomodoro.js"></script>
+
+</body>
+
+</html>
